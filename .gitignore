@@ -1,0 +1,10 @@
+node_modules/
+web/dist/
+.DS_Store
+assets-src/**/*.png
+assets-src/vid/
+assets-src/*.mp4
+# Referencias de personas y video de terceros: no se publican en el repo
+insumos/ref-*
+insumos/pase-jamal*
+entrega/
