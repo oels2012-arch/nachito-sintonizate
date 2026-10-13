@@ -1,7 +1,7 @@
 # Pitch de 5 minutos · "Sintonízate. Te toca."
 
 Se presenta bajando por la web: **https://oels2012-arch.github.io/nachito-sintonizate/**
-Para avanzar: **↓ o espacio** = siguiente capítulo; **↑** = anterior.
+Para avanzar: **↓ o espacio** = siguiente tiempo (cada capítulo tiene varios: titular → visual → dato); **↑** = anterior. Abajo, el sintonizador avanza de 88.0 a 95.1 FM y se fija "en sintonía" en el CTA.
 
 | Tiempo | Capítulo | Quién | Qué decir (ideas clave, no leer) |
 |---|---|---|---|
