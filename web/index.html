@@ -2,10 +2,10 @@
 <html lang="es-MX">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Sintonízate. Te toca. · Nachito × Radio ITESO</title>
   <meta name="description" content="Nachito, la mascota del ITESO, aparece en realidad aumentada con la playera de Radio ITESO 95.1, hace el pase de Jamal y te pasa el turno. Proyecto académico." />
-  <meta name="theme-color" content="#070d24" />
+  <meta name="theme-color" content="#050a1c" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Sintonízate. Te toca." />
   <meta property="og:description" content="Nachito × Radio ITESO 95.1 · Un filtro de RA que se baila, se comparte y se queda en la cabeza." />
@@ -16,30 +16,37 @@
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="assets/nachito-cutout.webp" />
 </head>
 <body>
   <a class="skip" href="#cap-1">Saltar intro</a>
 
-  <!-- ProgressEQ -->
-  <div class="progress-eq" aria-hidden="true"><div class="progress-eq__bars"></div></div>
+  <canvas class="world" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
 
-  <!-- ChapterIndex -->
+  <div class="progress-eq" aria-hidden="true"><div class="progress-eq__bars"></div></div>
   <nav class="chapter-index" aria-label="Capítulos"><ol></ol></nav>
+
+  <div class="tuner" aria-hidden="true">
+    <div class="tuner__read"><span class="tuner__band">FM</span><span class="tuner__freq">88.0</span></div>
+    <div class="tuner__scale"><div class="tuner__ticks"></div><div class="tuner__needle"></div></div>
+    <div class="tuner__meta"><span class="tuner__ch">00</span><span class="tuner__title">¿Lo escuchas?</span></div>
+    <span class="tuner__lock">EN SINTONÍA</span>
+  </div>
+
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
 
   <main>
     <!-- 0 · INTRO -->
-    <section class="chapter chapter--intro" id="cap-0" data-title="¿Lo escuchas?">
-      <div class="intro__pin">
-        <svg class="intro__wave" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
-          <path d="" />
-          <path d="" />
-        </svg>
+    <section class="scene scene--intro" id="cap-0" data-title="¿Lo escuchas?" data-tone="blue">
+      <div class="scene__inner">
+        <svg class="intro__wave" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true"><path d="" /><path d="" /><path d="" /></svg>
+        <div class="intro__rings" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="intro__copy">
-          <p class="kicker">Nachito × Radio ITESO 95.1</p>
-          <h1 class="display" data-reveal>¿Lo escuchas?</h1>
-          <p class="line" data-line>Baja el volumen del mundo. Sube el de Radio ITESO.</p>
+          <p class="kicker" data-fx="type">Nachito × Radio ITESO 95.1</p>
+          <h1 class="display display--xl" data-fx="chars3d">¿Lo escuchas?</h1>
+          <p class="line" data-fx="type">Baja el volumen del mundo. Sube el de Radio ITESO.</p>
         </div>
         <img class="intro__nachito" src="assets/nachito-cutout.webp" alt="Nachito, la mascota del ITESO, con la mano en la oreja y playera de Radio ITESO 95.1" width="900" height="1941" fetchpriority="high" />
         <p class="scroll-hint" aria-hidden="true"><span></span>Baja para sintonizar</p>
@@ -47,323 +54,413 @@
     </section>
 
     <!-- 1 · SÍNTOMA -->
-    <section class="chapter chapter--sintoma" id="cap-1" data-title="El síntoma" data-tone="red">
-      <div class="wrap grid">
-        <div class="col-text">
-          <p class="tag tag--red">01 · El síntoma</p>
-          <h2 class="display" data-reveal>Hay un podcast que casi nadie de tu edad conoce.</h2>
-          <p class="line" data-line>Radio ITESO 95.1 suena… pero no en tu <span class="u-red">feed</span>.</p>
-          <div class="stat" data-stat>
-            <span class="stat__num"><span data-count="33">0</span>%</span>
-            <span class="stat__label">de las personas en México escucha radio. En 2015 era 39.6%.</span>
-            <a class="stat__src" href="https://somosaudiencias.ift.org.mx/archivos/Consumo_Radio_ENCCA2024_V2.pdf" target="_blank" rel="noopener">IFT · ENCCA 2024</a>
+    <section class="scene scene--sintoma" id="cap-1" data-title="El síntoma" data-tone="red" data-len="260">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">01</span>
+        <div class="wrap sintoma__grid">
+          <div class="sintoma__text">
+            <p class="tag tag--red">01 · El síntoma</p>
+            <h2 class="display hero" data-fx="scramble">Hay un podcast que <span class="mk mk--red">casi nadie</span> de tu edad conoce.</h2>
+            <p class="line" data-fx="type" data-beat="line">Radio ITESO 95.1 suena… pero no en tu feed.</p>
           </div>
-        </div>
-        <div class="col-visual">
-          <div class="dial" aria-hidden="true">
+          <div class="dial" data-beat="visual" aria-hidden="true">
             <div class="dial__static"></div>
             <svg viewBox="0 0 400 400">
-              <circle cx="200" cy="200" r="180" class="dial__ring" />
+              <circle cx="200" cy="200" r="186" class="dial__ring" />
+              <circle cx="200" cy="200" r="150" class="dial__ring dial__ring--in" />
               <g class="dial__ticks"></g>
-              <g class="dial__needle"><line x1="200" y1="200" x2="200" y2="40" /><circle cx="200" cy="200" r="10" /></g>
+              <g class="dial__needle"><line x1="200" y1="200" x2="200" y2="44" /><circle cx="200" cy="200" r="12" /></g>
             </svg>
             <span class="dial__nosignal">SIN SEÑAL</span>
+          </div>
+          <div class="stat stat--spark" data-beat="stat">
+            <span class="stat__num"><span data-count="33">0</span>%</span>
+            <span class="stat__label">de las personas en México escucha radio.</span>
+            <svg class="spark" viewBox="0 0 320 110" role="img" aria-label="Escucha de radio en México: 39.6% en 2015, 38% en 2021, 35% en 2023, 33% en 2024">
+              <polyline class="spark__line" points="10,20 150,38 230,62 310,82" />
+              <g class="spark__pts"><circle cx="10" cy="20" r="5"/><circle cx="150" cy="38" r="5"/><circle cx="230" cy="62" r="5"/><circle cx="310" cy="82" r="6" class="last"/></g>
+              <g class="spark__lbl"><text x="10" y="104">2015 · 39.6</text><text x="150" y="104" text-anchor="middle">2021 · 38</text><text x="310" y="104" text-anchor="end">2024 · 33</text></g>
+            </svg>
+            <a class="stat__src" href="https://somosaudiencias.ift.org.mx/archivos/Consumo_Radio_ENCCA2024_V2.pdf" target="_blank" rel="noopener">IFT · ENCCA 2015–2024</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 2 · NÚCLEO -->
-    <section class="chapter chapter--nucleo" id="cap-2" data-title="El núcleo" data-tone="red">
-      <div class="nucleo__pin wrap">
-        <div class="nucleo__head">
-          <p class="tag tag--red">02 · El núcleo</p>
-          <h2 class="display display--md" data-reveal>A los jóvenes no les llegas con anuncios. <em>Les llegas con algo que les da risa.</em></h2>
-        </div>
-        <div class="nucleo__stage">
-          <div class="ad" aria-hidden="true">
-            <span class="ad__badge">Anuncio</span>
-            <p class="ad__title">Conoce nuestra oferta radiofónica institucional</p>
-            <p class="ad__body">Programación de calidad para toda la comunidad universitaria.</p>
-            <svg class="ad__strike" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="4" y1="96" x2="96" y2="4" /><line x1="4" y1="4" x2="96" y2="96" /></svg>
+    <section class="scene scene--nucleo" id="cap-2" data-title="El núcleo" data-tone="red" data-len="320">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">02</span>
+        <div class="wrap nucleo__grid">
+          <div class="nucleo__text">
+            <p class="tag tag--red">02 · El núcleo</p>
+            <div class="nucleo__heads deck--mob">
+              <h2 class="display display--md hero nucleo__a" data-fx="rise"><span class="strike">A los jóvenes no les llegas con anuncios.</span></h2>
+              <h2 class="display display--md nucleo__b" data-fx="blur" data-beat="b">Les llegas con algo que les da risa.</h2>
+            </div>
           </div>
-          <div class="phone phone--trend">
-            <video muted playsinline loop preload="none" poster="assets/v1-escucha-poster.jpg" data-lazy-video>
-              <source data-src="assets/v1-escucha-720.webm" type="video/webm" />
-              <source data-src="assets/v1-escucha-720.mp4" type="video/mp4" />
-            </video>
-            <span class="phone__ui">♥ 48.2k · ↗ compartir</span>
+          <div class="nucleo__stage" data-beat="visual">
+            <div class="ad" aria-hidden="true">
+              <span class="ad__badge">Anuncio</span>
+              <p class="ad__title">Conoce nuestra oferta radiofónica institucional</p>
+              <p class="ad__body">Programación de calidad para toda la comunidad universitaria.</p>
+              <span class="ad__skip">Omitir anuncio ›</span>
+              <svg class="ad__strike" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="4" y1="96" x2="96" y2="4" /><line x1="4" y1="4" x2="96" y2="96" /></svg>
+            </div>
+            <div class="phone phone--trend">
+              <video muted playsinline loop preload="none" poster="assets/v1-escucha-poster.jpg" data-lazy-video>
+                <source data-src="assets/v1-escucha-720.webm" type="video/webm" />
+                <source data-src="assets/v1-escucha-720.mp4" type="video/mp4" />
+              </video>
+              <div class="phone__side" aria-hidden="true"><span>♥<b>48.2k</b></span><span>💬<b>1.3k</b></span><span>↗<b>9.7k</b></span></div>
+              <span class="phone__ui">@alumno.iteso · ¿lo escuchas? 🎧</span>
+              <div class="reactions" aria-hidden="true"></div>
+            </div>
           </div>
-        </div>
-        <div class="nucleo__stats">
-          <div class="stat stat--sm" data-stat>
-            <span class="stat__num"><span data-count="49">0</span>%</span>
-            <span class="stat__label">de jóvenes de 13–24 pone mucha más atención si algo le da risa.</span>
-            <a class="stat__src" href="https://www.edisonresearch.com/the-gen-z-audio-report/" target="_blank" rel="noopener">Edison Research · Gen Z Audio Report 2025 (EE. UU.)</a>
-          </div>
-          <div class="stat stat--sm" data-stat>
-            <span class="stat__num"><span data-count="72">0</span>%</span>
-            <span class="stat__label">de la Gen Z descubre contenido nuevo en TikTok o Instagram.</span>
-            <a class="stat__src" href="https://www.emarketer.com/content/youtube-social-media-lead-gen-z-content-discovery-algorithms-drive-viewing-choices" target="_blank" rel="noopener">Toluna vía eMarketer (EE. UU.)</a>
+          <div class="nucleo__stats deck--mob" data-beat="stats">
+            <div class="stat stat--sm">
+              <span class="stat__num"><span data-count="49">0</span>%</span>
+              <span class="stat__label">de jóvenes de 13–24 pone mucha más atención si algo le da risa.</span>
+              <a class="stat__src" href="https://www.edisonresearch.com/the-gen-z-audio-report/" target="_blank" rel="noopener">Edison Research · Gen Z Audio Report 2025 (EE. UU.)</a>
+            </div>
+            <div class="stat stat--sm">
+              <span class="stat__num"><span data-count="72">0</span>%</span>
+              <span class="stat__label">de la Gen Z descubre contenido nuevo en TikTok o Instagram.</span>
+              <a class="stat__src" href="https://www.emarketer.com/content/youtube-social-media-lead-gen-z-content-discovery-algorithms-drive-viewing-choices" target="_blank" rel="noopener">Toluna vía eMarketer (EE. UU.)</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 3 · PÚBLICO -->
-    <section class="chapter chapter--publico" id="cap-3" data-title="A quién" data-tone="amber">
-      <div class="wrap">
-        <p class="tag tag--amber">03 · Público meta</p>
-        <h2 class="display" data-reveal>Les hablamos en su idioma.</h2>
-        <p class="line" data-line>Trends, memes y “te toca”.</p>
-        <div class="personas">
-          <article class="persona" data-persona>
-            <span class="persona__num">1</span>
-            <h3>Alumno ITESO</h3>
-            <p>Lo empieza. Abre el filtro en el salón y lo sube con sus amigos.</p>
-            <span class="persona__role persona__role--green">Inicia el trend</span>
-          </article>
-          <article class="persona" data-persona>
-            <span class="persona__num">2</span>
-            <h3>Universitario de otra escuela</h3>
-            <p>Lo ve en su feed, le da risa y lo continúa.</p>
-            <span class="persona__role persona__role--amber">Lo continúa</span>
-          </article>
-          <article class="persona" data-persona>
-            <span class="persona__num">3</span>
-            <h3>Prepa</h3>
-            <p>Lo ve, lo comparte y descubre el ITESO sin buscarlo.</p>
-            <span class="persona__role">Alcance secundario</span>
-          </article>
+    <section class="scene scene--publico" id="cap-3" data-title="A quién" data-tone="amber" data-len="280">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">03</span>
+        <div class="slang" aria-hidden="true">
+          <span>POV:</span><span>😂</span><span>te toca</span><span>#trend</span><span>no manches</span><span>🎧</span><span>meme</span><span>sintonízate</span><span>dueto</span><span>🔁</span>
+        </div>
+        <div class="wrap publico__grid">
+          <div class="publico__head">
+            <p class="tag tag--amber">03 · Público meta</p>
+            <h2 class="display hero" data-fx="wipe">Les hablamos en <span class="mk mk--amber">su idioma.</span></h2>
+            <p class="line" data-fx="type" data-beat="line">Trends, memes y “te toca”.</p>
+          </div>
+          <div class="personas deck--mob" data-beat="cards">
+            <article class="persona">
+              <span class="persona__num">1</span>
+              <div class="persona__avatar" aria-hidden="true">🎓</div>
+              <h3>Alumno ITESO</h3>
+              <p>Lo empieza. Abre el filtro en el salón y lo sube con sus amigos.</p>
+              <span class="persona__role persona__role--green">Inicia el trend</span>
+            </article>
+            <article class="persona">
+              <span class="persona__num">2</span>
+              <div class="persona__avatar" aria-hidden="true">🏫</div>
+              <h3>Universitario de otra escuela</h3>
+              <p>Lo ve en su feed, le da risa y lo continúa.</p>
+              <span class="persona__role persona__role--amber">Lo continúa</span>
+            </article>
+            <article class="persona">
+              <span class="persona__num">3</span>
+              <div class="persona__avatar" aria-hidden="true">🎒</div>
+              <h3>Prepa</h3>
+              <p>Lo ve, lo comparte y descubre el ITESO sin buscarlo.</p>
+              <span class="persona__role">Alcance secundario</span>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 4 · LA CADENA -->
-    <section class="chapter chapter--cadena" id="cap-4" data-title="La cadena" data-tone="amber">
-      <div class="cadena__pin wrap">
-        <div class="cadena__head">
-          <p class="tag tag--amber">04 · La cadena</p>
-          <h2 class="display display--md" data-reveal>La cadena</h2>
-          <p class="line" data-line>Risa → share → meme → “Radio ITESO” en la cabeza → podcast → vuelta.</p>
-          <p class="micro"><span class="dot dot--amber"></span>Lógica fluida + pensamiento sistémico</p>
+    <section class="scene scene--cadena" id="cap-4" data-title="La cadena" data-tone="amber" data-len="360">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">04</span>
+        <div class="wrap cadena__grid">
+          <div class="cadena__head">
+            <p class="tag tag--amber">04 · La cadena</p>
+            <h2 class="display hero" data-fx="scramble">La cadena</h2>
+            <p class="line" data-fx="type" data-beat="line">Un ciclo que se alimenta solo.</p>
+            <p class="micro cadena__tag" data-beat="tagline"><span class="dot dot--amber"></span>Lógica fluida + pensamiento sistémico</p>
+          </div>
+          <div class="cycle-wrap" data-beat="visual">
+            <svg class="cycle" viewBox="-150 -20 900 640" role="img" aria-label="Ciclo: trend que da risa, se comparte, Nachito se viraliza, queda Radio ITESO en la mente, descubren el podcast, lo escuchan, vuelven a compartir">
+              <circle class="cycle__track" cx="300" cy="300" r="220" />
+              <circle class="cycle__track cycle__track--in" cx="300" cy="300" r="160" />
+              <circle class="cycle__draw" cx="300" cy="300" r="220" />
+              <g class="cycle__nodes"></g>
+              <g class="cycle__orbit"><circle cx="300" cy="80" r="7" /></g>
+            </svg>
+            <div class="cycle__center">
+              <span class="cycle__step">01</span>
+              <span class="cycle__label">Trend que da risa</span>
+            </div>
+          </div>
         </div>
-        <svg class="cycle" viewBox="-130 -10 860 620" role="img" aria-label="Ciclo: trend que da risa, se comparte, Nachito se viraliza, queda Radio ITESO en la mente, descubren el podcast, lo escuchan, vuelven a compartir">
-          <circle class="cycle__track" cx="300" cy="300" r="220" />
-          <circle class="cycle__draw" cx="300" cy="300" r="220" />
-          <g class="cycle__nodes"></g>
-          <text class="cycle__center" x="300" y="292" text-anchor="middle">SINTONÍZATE</text>
-          <text class="cycle__center cycle__center--sub" x="300" y="326" text-anchor="middle">Radio ITESO 95.1</text>
-        </svg>
       </div>
     </section>
 
     <!-- 5 · NACHITO -->
-    <section class="chapter chapter--nachito" id="cap-5" data-title="Nachito" data-tone="green">
-      <div class="nachito__pin">
+    <section class="scene scene--nachito" id="cap-5" data-title="Nachito" data-tone="green" data-len="260">
+      <div class="scene__inner">
         <div class="nachito__layers">
-          <img class="nachito__bg" src="assets/kf-trio.jpg" alt="Camila, Nachito y Diego listos para bailar en la Plaza de los Cincuenta del ITESO" loading="lazy" width="1080" height="1920" />
+          <img class="nachito__bg" src="assets/kf-trio.jpg" alt="Camila, Nachito y Diego listos para bailar en la Plaza de los Cincuenta del ITESO" loading="lazy" width="1080" height="1936" />
         </div>
+        <div class="nachito__callout" aria-hidden="true"><span class="nachito__callout-line"></span><span class="nachito__callout-txt">Aquí vive la marca · RADIO ITESO 95.1</span></div>
         <div class="nachito__copy wrap">
           <p class="tag tag--green">05 · El personaje</p>
-          <h2 class="display" data-reveal>Nuestro locutor no oficial.</h2>
-          <p class="line" data-line>Nachito, con la playera de <strong>Radio ITESO</strong> puesta.</p>
+          <h2 class="display" data-fx="chars3d">Nuestro locutor</h2>
+          <span class="stamp" data-beat="stamp">No oficial.</span>
+          <p class="line" data-fx="type" data-beat="line">Nachito, con la playera de <strong>Radio ITESO</strong> puesta.</p>
         </div>
       </div>
     </section>
 
     <!-- 6 · EXPERIENCIA -->
-    <section class="chapter chapter--exp" id="cap-6" data-title="La experiencia" data-tone="green">
-      <div class="exp__pin wrap">
-        <div class="exp__text">
-          <p class="tag tag--green">06 · La experiencia</p>
-          <h2 class="display display--md">Escucha · Baila · Te toca</h2>
-          <ol class="steps">
-            <li data-step="0"><span class="steps__dot"></span><strong>Escucha.</strong> Nachito aparece y se lleva la mano a la oreja.</li>
-            <li data-step="1"><span class="steps__dot"></span><strong>Baila.</strong> Arma el pase de Jamal.</li>
-            <li data-step="2"><span class="steps__dot"></span><strong>Te toca.</strong> Te señala y te deja la pista.</li>
-          </ol>
-          <div class="stat stat--sm" data-stat>
-            <span class="stat__num"><span data-count="40">0</span>%</span>
-            <span class="stat__label">de la Gen Z que crea contenido usa filtros de RA en lo que comparte.</span>
-            <a class="stat__src" href="https://arinsider.co/2019/12/30/40-percent-of-gen-z-use-social-ar-lenses/" target="_blank" rel="noopener">JWT Intelligence vía AR Insider (2019)</a>
+    <section class="scene scene--exp" id="cap-6" data-title="La experiencia" data-tone="green" data-len="420">
+      <div class="scene__inner">
+        <div class="ghost" aria-hidden="true"><span>Escucha</span><span>Baila</span><span>Te toca</span></div>
+        <div class="wrap exp__grid">
+          <div class="exp__text">
+            <p class="tag tag--green">06 · La experiencia</p>
+            <h2 class="display display--md hero exp__title"><span class="w">Escucha</span> <span class="sep">·</span> <span class="w">Baila</span> <span class="sep">·</span> <span class="w">Te toca</span></h2>
+            <ol class="steps deck--mob" data-beat="steps">
+              <li><span class="steps__dot"></span><span><strong>Escucha.</strong> Nachito aparece y se lleva la mano a la oreja.</span></li>
+              <li><span class="steps__dot"></span><span><strong>Baila.</strong> Arma el pase de Jamal con tus amigos.</span></li>
+              <li><span class="steps__dot"></span><span><strong>Te toca.</strong> Te señala y te deja la pista.</span></li>
+            </ol>
+            <div class="stat stat--sm exp__stat" data-beat="stat">
+              <span class="stat__num"><span data-count="40">0</span>%</span>
+              <span class="stat__label">de la Gen Z que crea contenido usa filtros de RA en lo que comparte.</span>
+              <a class="stat__src" href="https://arinsider.co/2019/12/30/40-percent-of-gen-z-use-social-ar-lenses/" target="_blank" rel="noopener">JWT Intelligence vía AR Insider (2019)</a>
+            </div>
           </div>
-        </div>
-        <div class="phone phone--main">
-          <video class="exp__video" muted playsinline preload="none" poster="assets/nachito-sintonizate-poster.jpg" data-scrub>
-            <source data-src="assets/nachito-scrub.mp4" type="video/mp4" />
-          </video>
-          <span class="phone__rec"><span></span>REC · filtro Nachito</span>
+          <div class="phone phone--main" data-beat="visual">
+            <video class="exp__video" muted playsinline preload="none" poster="assets/nachito-sintonizate-poster.jpg" data-scrub>
+              <source data-src="assets/nachito-scrub.mp4" type="video/mp4" />
+            </video>
+            <span class="phone__rec"><span></span>REC · filtro Nachito</span>
+            <div class="phone__timeline"><i></i></div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 7 · LA META -->
-    <section class="chapter chapter--meta" id="cap-7" data-title="La meta" data-tone="green">
-      <div class="wrap grid">
-        <div class="col-visual meta__visual">
-          <img src="assets/nachito-podcast.jpg" alt="Nachito con audífonos frente al micrófono en una cabina de radio, playera de Radio ITESO 95.1" loading="lazy" width="1080" height="1340" />
-          <div class="eq" aria-hidden="true"></div>
-          <span class="onair"><span></span>EN VIVO</span>
-        </div>
-        <div class="col-text">
-          <p class="tag tag--green">07 · La meta</p>
-          <h2 class="display" data-reveal>Te ríes con Nachito. <em>Te quedas con Radio ITESO.</em></h2>
-          <p class="line" data-line>Él pone el meme; el podcast se queda con tu atención.</p>
-          <ul class="chips">
-            <li><span class="check"></span>Personalidad</li>
-            <li><span class="check"></span>Atención</li>
-            <li><span class="check"></span>Gancho</li>
-          </ul>
-          <p class="flow-mini">Viralidad <span>→</span> Recordación <span>→</span> <strong>Podcast</strong></p>
-          <a class="btn btn--green" href="https://radio.iteso.mx/" target="_blank" rel="noopener">Escuchar Radio ITESO 95.1 ↗</a>
+    <section class="scene scene--meta" id="cap-7" data-title="La meta" data-tone="green" data-len="320">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">07</span>
+        <div class="wrap meta__grid">
+          <div class="meta__text">
+            <p class="tag tag--green">07 · La meta</p>
+            <h2 class="display meta__a hero" data-fx="rise">Te ríes con Nachito.</h2>
+            <h2 class="display meta__b" data-beat="fill"><span class="fill" data-text="Te quedas con Radio ITESO.">Te quedas con Radio ITESO.</span></h2>
+          </div>
+          <div class="meta__visual" data-beat="visual">
+            <div class="meta__img">
+              <img src="assets/nachito-podcast.jpg" alt="Nachito con audífonos frente al micrófono en una cabina de radio, playera de Radio ITESO 95.1" loading="lazy" width="1080" height="1446" />
+              <div class="eq" aria-hidden="true"></div>
+              <span class="onair"><span></span>EN VIVO</span>
+            </div>
+            <div class="meta__info">
+              <p class="line">Él pone el meme; el podcast se queda con tu atención.</p>
+              <ul class="chips">
+                <li><span class="check"></span>Personalidad</li>
+                <li><span class="check"></span>Atención</li>
+                <li><span class="check"></span>Gancho</li>
+              </ul>
+              <p class="flow-mini">Viralidad <span>→</span> Recordación <span>→</span> <strong>Podcast</strong></p>
+              <a class="btn btn--green" href="https://radio.iteso.mx/" target="_blank" rel="noopener">Escuchar Radio ITESO 95.1 ↗</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 8 · JINGLE -->
-    <section class="chapter chapter--jingle" id="cap-8" data-title="Próxima fase" data-tone="amber">
-      <div class="wrap">
-        <span class="badge-next">Próxima fase</span>
-        <h2 class="display" data-reveal>El jingle</h2>
-        <p class="line" data-line>Una rola propia que se te pega: “Radio ITESO… Sintonízate”.</p>
-        <svg class="jingle__wave" viewBox="0 0 1000 220" aria-hidden="true">
-          <defs><path id="wavepath" d="M0,120 C120,40 240,200 360,120 S600,40 720,120 S900,200 1000,120" /></defs>
-          <use href="#wavepath" class="jingle__line" />
-          <text><textPath href="#wavepath" startOffset="0%" class="jingle__text">RADIO ITESO · SINTONÍZATE · RADIO ITESO · SINTONÍZATE ·</textPath></text>
-        </svg>
-        <div class="benefits">
-          <div class="benefit" data-benefit>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2z"/></svg>
-            <h3>Es propio</h3><p>Sin broncas de derechos: va dentro del filtro.</p>
+    <section class="scene scene--jingle" id="cap-8" data-title="Próxima fase" data-tone="amber" data-len="280">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">08</span>
+        <div class="notes" aria-hidden="true"><span>♪</span><span>♫</span><span>♪</span><span>♬</span><span>♫</span><span>♪</span></div>
+        <div class="wrap jingle__grid">
+          <div class="jingle__head">
+            <span class="badge-next">Próxima fase</span>
+            <h2 class="display hero" data-fx="chars3d">El jingle</h2>
+            <p class="line" data-fx="type" data-beat="line">Una rola propia que se te pega: “Radio ITESO… Sintonízate”.</p>
           </div>
-          <div class="benefit" data-benefit>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 34V10l20-4v24"/><circle cx="13" cy="34" r="5"/><circle cx="33" cy="30" r="5"/></svg>
-            <h3>Es el sonido del trend</h3><p>Cada video que lo usa suma a la misma página del audio.</p>
-          </div>
-          <div class="benefit" data-benefit>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M16 30c-4-2-6-6-6-11a14 14 0 0128 0c0 8-8 9-8 16a5 5 0 01-10 0"/><path d="M20 19a4 4 0 018 0"/></svg>
-            <h3>Se queda en el oído</h3><p>Aunque no leas la playera, la canción se te pega.</p>
+          <svg class="jingle__wave" viewBox="0 0 1000 220" aria-hidden="true" data-beat="wave">
+            <defs><path id="wavepath" d="M0,120 C120,40 240,200 360,120 S600,40 720,120 S900,200 1000,120" /></defs>
+            <use href="#wavepath" class="jingle__line" />
+            <text><textPath href="#wavepath" startOffset="0%" class="jingle__text">RADIO ITESO · SINTONÍZATE · RADIO ITESO · SINTONÍZATE · RADIO ITESO ·</textPath></text>
+          </svg>
+          <div class="benefits deck--mob" data-beat="cards">
+            <div class="benefit">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2z"/></svg>
+              <h3>Es propio</h3><p>Sin broncas de derechos: va dentro del filtro.</p>
+            </div>
+            <div class="benefit">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 34V10l20-4v24"/><circle cx="13" cy="34" r="5"/><circle cx="33" cy="30" r="5"/></svg>
+              <h3>Es el sonido del trend</h3><p>Cada video que lo usa suma a la misma página del audio.</p>
+            </div>
+            <div class="benefit">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M16 30c-4-2-6-6-6-11a14 14 0 0128 0c0 8-8 9-8 16a5 5 0 01-10 0"/><path d="M20 19a4 4 0 018 0"/></svg>
+              <h3>Se queda en el oído</h3><p>Aunque no leas la playera, la canción se te pega.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 9 · CONTAGIO -->
-    <section class="chapter chapter--contagio" id="cap-9" data-title="Cómo se contagia" data-tone="green">
-      <div class="contagio__pin wrap">
-        <div class="contagio__head">
-          <p class="tag tag--green">09 · Circulación</p>
-          <h2 class="display display--md" data-reveal>Cada share es una invitación.</h2>
-          <p class="line" data-line>Más shares = más jóvenes que conocen <strong>Radio ITESO</strong> y el <strong>ITESO</strong> sin buscarlos.</p>
+    <section class="scene scene--contagio" id="cap-9" data-title="Cómo se contagia" data-tone="green" data-len="320">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">09</span>
+        <div class="wrap contagio__grid">
+          <div class="contagio__head">
+            <p class="tag tag--green">09 · Circulación</p>
+            <h2 class="display display--md hero" data-fx="rise">Cada share es <span class="mk mk--green">una invitación.</span></h2>
+            <p class="line" data-fx="type" data-beat="line">Más shares = más jóvenes que conocen Radio ITESO y el ITESO sin buscarlos.</p>
+          </div>
+          <div class="chain" data-beat="chain" aria-hidden="true">
+            <div class="chain__card"><img src="assets/kf-escucha.jpg" alt="" loading="lazy" /><span>@alumno.iteso</span></div>
+            <span class="chain__arrow">↗</span>
+            <div class="chain__card"><img src="assets/kf-trio.jpg" alt="" loading="lazy" /><span>@su.amiga</span></div>
+            <span class="chain__arrow">↗</span>
+            <div class="chain__card"><img src="assets/kf-tetoca.jpg" alt="" loading="lazy" /><span>@otra.uni</span></div>
+            <span class="chain__arrow">↗</span>
+            <div class="chain__card chain__card--you"><span class="chain__you">TE TOCA</span><span>@tú</span></div>
+          </div>
+          <div class="reach-wrap" data-beat="reach">
+            <svg class="reach" viewBox="0 0 600 340" role="img" aria-label="Los videos salen del ITESO hacia otras universidades y preparatorias">
+              <g class="reach__rings"><circle cx="300" cy="170" r="60"/><circle cx="300" cy="170" r="120"/><circle cx="300" cy="170" r="180"/></g>
+              <g class="reach__links"></g>
+              <g class="reach__nodes"></g>
+            </svg>
+            <p class="micro reach__legend"><span class="dot dot--green"></span>ITESO <span class="dot"></span>Otras unis <span class="dot dot--amber"></span>Prepas · <em>ilustrativo</em></p>
+          </div>
         </div>
-        <div class="chain" aria-hidden="true">
-          <div class="chain__card"><img src="assets/kf-escucha.jpg" alt="" loading="lazy" /><span>@alumno.iteso</span></div>
-          <div class="chain__card"><img src="assets/kf-trio.jpg" alt="" loading="lazy" /><span>@su.amiga</span></div>
-          <div class="chain__card"><img src="assets/kf-tetoca.jpg" alt="" loading="lazy" /><span>@otra.uni</span></div>
-          <div class="chain__card chain__card--you"><span class="chain__you">TE TOCA</span><span>@tú</span></div>
-        </div>
-        <svg class="reach" viewBox="0 0 600 340" role="img" aria-label="Los videos salen del ITESO hacia otras universidades y preparatorias">
-          <g class="reach__links"></g>
-          <g class="reach__nodes"></g>
-        </svg>
-        <p class="micro reach__legend"><span class="dot dot--green"></span>ITESO <span class="dot"></span>Otras universidades <span class="dot dot--amber"></span>Prepas · <em>ilustrativo, no es un dato</em></p>
       </div>
     </section>
 
     <!-- 10 · DÓNDE VIVE -->
-    <section class="chapter chapter--donde" id="cap-10" data-title="Dónde vive" data-tone="green">
-      <div class="wrap">
-        <p class="tag tag--green">10 · EVI y estaciones</p>
-        <h2 class="display display--md" data-reveal>Dónde vive</h2>
-        <p class="line" data-line>Salón, explanada, cabina, Open House y ferias.</p>
-        <div class="donde__grid">
-          <div class="stationmap">
-            <svg viewBox="0 0 500 360" role="img" aria-label="Mapa ilustrado de estaciones">
-              <path class="stationmap__path" d="M60,300 C120,220 140,120 230,110 S380,160 430,80" />
-              <rect x="20" y="20" width="460" height="320" rx="24" class="stationmap__frame" />
-            </svg>
-            <ul class="pins">
-              <li style="--x:12%;--y:83%"><span class="pin"></span>Salón</li>
-              <li style="--x:30%;--y:50%"><span class="pin"></span>Explanada</li>
-              <li style="--x:48%;--y:30%"><span class="pin"></span>Cabina Radio ITESO</li>
-              <li style="--x:70%;--y:42%"><span class="pin"></span>Open House</li>
-              <li style="--x:86%;--y:22%"><span class="pin"></span>Ferias</li>
-            </ul>
+    <section class="scene scene--donde" id="cap-10" data-title="Dónde vive" data-tone="green" data-len="300">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">10</span>
+        <div class="wrap donde__grid">
+          <div class="donde__head">
+            <p class="tag tag--green">10 · EVI y estaciones</p>
+            <h2 class="display display--md hero" data-fx="wipe">Dónde vive</h2>
+            <p class="line" data-fx="type" data-beat="line">Salón, explanada, cabina, Open House y ferias.</p>
           </div>
-          <div class="scale">
-            <svg viewBox="0 0 360 300" role="img" aria-label="Escala: Nachito 1.9 metros, persona 1.7 metros, puerta 2.1 metros">
-              <line x1="10" y1="270" x2="350" y2="270" class="scale__floor" />
-              <rect class="scale__door" x="250" y="70" width="80" height="200" />
-              <g class="scale__person"><circle cx="70" cy="122" r="14" /><rect x="56" y="138" width="28" height="70" rx="10" /><rect x="58" y="206" width="10" height="64" rx="4" /><rect x="72" y="206" width="10" height="64" rx="4" /></g>
-              <image class="scale__nachito" href="assets/nachito-cutout.webp" x="108" y="86" width="132" height="184" preserveAspectRatio="xMidYMax meet" />
-              <g class="scale__labels">
-                <text x="70" y="104" text-anchor="middle">1.7 m</text>
-                <text x="174" y="78" text-anchor="middle">~1.9 m</text>
-                <text x="290" y="60" text-anchor="middle">2.1 m</text>
-              </g>
-            </svg>
-            <p class="micro">Nachito anclado al piso · área libre de ~2 × 2 m para bailar a su lado.</p>
+          <div class="donde__deck deck--mob">
+            <div class="stationmap" data-beat="map">
+              <svg viewBox="0 0 500 360" role="img" aria-label="Mapa ilustrado de estaciones">
+                <rect x="10" y="10" width="480" height="340" rx="28" class="stationmap__frame" />
+                <g class="stationmap__grid"></g>
+                <path class="stationmap__path" d="M70,300 C120,220 140,130 235,118 S385,170 440,80" />
+              </svg>
+              <ul class="pins">
+                <li style="--x:14%;--y:83%"><span class="pin"></span>Salón</li>
+                <li style="--x:31%;--y:50%"><span class="pin"></span>Explanada</li>
+                <li style="--x:48%;--y:32%"><span class="pin"></span>Cabina Radio ITESO</li>
+                <li style="--x:70%;--y:44%"><span class="pin"></span>Open House</li>
+                <li style="--x:88%;--y:22%"><span class="pin"></span>Ferias</li>
+              </ul>
+            </div>
+            <div class="scale" data-beat="scale">
+              <svg viewBox="0 0 360 300" role="img" aria-label="Escala: Nachito 1.9 metros, persona 1.7 metros, puerta 2.1 metros">
+                <line x1="10" y1="270" x2="350" y2="270" class="scale__floor" />
+                <rect class="scale__door" x="250" y="70" width="80" height="200" />
+                <g class="scale__person"><circle cx="70" cy="122" r="14" /><rect x="56" y="138" width="28" height="70" rx="10" /><rect x="58" y="206" width="10" height="64" rx="4" /><rect x="72" y="206" width="10" height="64" rx="4" /></g>
+                <image class="scale__nachito" href="assets/nachito-cutout.webp" x="108" y="86" width="132" height="184" preserveAspectRatio="xMidYMax meet" />
+                <g class="scale__dims">
+                  <line x1="40" y1="108" x2="40" y2="270" /><line x1="244" y1="86" x2="244" y2="270" /><line x1="340" y1="70" x2="340" y2="270" />
+                </g>
+                <g class="scale__labels">
+                  <text x="70" y="100" text-anchor="middle">1.7 m</text>
+                  <text x="174" y="76" text-anchor="middle">~1.9 m</text>
+                  <text x="290" y="60" text-anchor="middle">2.1 m</text>
+                </g>
+              </svg>
+              <p class="micro">Anclado al piso · área libre de ~2 × 2 m para bailar a su lado.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 11 · MEDICIÓN -->
-    <section class="chapter chapter--medicion" id="cap-11" data-title="Cómo medimos" data-tone="green">
-      <div class="wrap">
-        <p class="tag tag--green">11 · Medición</p>
-        <h2 class="display display--md" data-reveal>Cómo medimos</h2>
-        <p class="line" data-line>Si recuerdan a Nachito pero no a <strong>Radio ITESO</strong>, perdimos.</p>
-        <div class="metrics">
-          <article class="metric" data-metric>
-            <span class="check check--lg"></span>
-            <h3>Viralidad</h3>
-            <p>Usos del filtro, videos publicados y shares. Con el jingle: videos con su sonido.</p>
-          </article>
-          <article class="metric" data-metric>
-            <span class="check check--lg"></span>
-            <h3>Recordación</h3>
-            <p>% que recuerda “Radio ITESO” sin ayuda después de ver el video.</p>
-          </article>
-          <article class="metric" data-metric>
-            <span class="check check--lg"></span>
-            <h3>Conversión</h3>
-            <p>Nuevos oyentes y seguidores del podcast, medidos con UTM y QR propio.</p>
-          </article>
+    <section class="scene scene--medicion" id="cap-11" data-title="Cómo medimos" data-tone="green" data-len="300">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">11</span>
+        <div class="wrap medicion__grid">
+          <div class="medicion__head">
+            <p class="tag tag--green">11 · Medición</p>
+            <h2 class="display display--md quote hero" data-fx="type-lg">“Si recuerdan a Nachito pero no a Radio ITESO, <span class="mk mk--red">perdimos.”</span></h2>
+          </div>
+          <div class="metrics deck--mob" data-beat="cards">
+            <article class="metric">
+              <svg class="metric__check" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><path d="M14 25l7 7 13-15"/></svg>
+              <h3>Viralidad</h3>
+              <p>Usos del filtro, videos publicados y shares. Con el jingle: videos con su sonido.</p>
+              <div class="metric__bar"><i></i></div>
+            </article>
+            <article class="metric">
+              <svg class="metric__check" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><path d="M14 25l7 7 13-15"/></svg>
+              <h3>Recordación</h3>
+              <p>% que recuerda “Radio ITESO” sin ayuda después de ver el video.</p>
+              <div class="metric__bar"><i></i></div>
+            </article>
+            <article class="metric">
+              <svg class="metric__check" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><path d="M14 25l7 7 13-15"/></svg>
+              <h3>Conversión</h3>
+              <p>Nuevos oyentes y seguidores del podcast, medidos con UTM y QR propio.</p>
+              <div class="metric__bar"><i></i></div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 12 · NEGOCIO -->
-    <section class="chapter chapter--negocio" id="cap-12" data-title="El negocio" data-tone="green">
-      <div class="wrap">
-        <p class="tag tag--green">12 · Negocio digital</p>
-        <h2 class="display display--md" data-reveal>El negocio</h2>
-        <p class="line" data-line>Mascota en RA como servicio: hoy Radio ITESO, mañana cualquier mascota.</p>
-        <ol class="biz">
-          <li data-biz><span>Piloto</span>Radio ITESO / ITESO</li>
-          <li data-biz><span>Escala</span>Otras universidades</li>
-          <li data-biz><span>Escala</span>Medios y equipos</li>
-          <li data-biz><span>Escala</span>Marcas con mascota</li>
-        </ol>
-        <p class="micro biz__pack">Paquete: personaje 3D animado · filtro · activación · medición. Para el usuario: gratis.</p>
+    <section class="scene scene--negocio" id="cap-12" data-title="El negocio" data-tone="green" data-len="240">
+      <div class="scene__inner">
+        <span class="scene__num" aria-hidden="true">12</span>
+        <div class="wrap negocio__grid">
+          <div class="negocio__head">
+            <p class="tag tag--green">12 · Negocio digital</p>
+            <h2 class="display display--md hero" data-fx="chars3d">El negocio</h2>
+            <p class="line" data-fx="type" data-beat="line">Mascota en RA como servicio: hoy Radio ITESO, mañana cualquier mascota.</p>
+          </div>
+          <div class="biz-wrap" data-beat="biz">
+            <svg class="biz__line" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="5" x2="1000" y2="5" /></svg>
+            <ol class="biz">
+              <li><span>Piloto</span>Radio ITESO / ITESO</li>
+              <li><span>Escala</span>Otras universidades</li>
+              <li><span>Escala</span>Medios y equipos</li>
+              <li><span>Escala</span>Marcas con mascota</li>
+            </ol>
+            <p class="micro biz__pack">Paquete: personaje 3D animado · filtro · activación · medición. Para el usuario: gratis.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- 13 · CTA -->
-    <section class="chapter chapter--cta" id="cap-13" data-title="Te toca">
-      <div class="wrap grid">
-        <div class="col-text">
-          <h2 class="display" data-reveal>Escanea. Sintonízate. <em>Te toca.</em></h2>
-          <p class="line" data-line>Tu turno. Grábalo con tus amigos.</p>
-          <div class="qr">
-            <img src="assets/qr-filtro.png" alt="Código QR del filtro (demo)" width="320" height="320" loading="lazy" />
-            <span class="qr__label"><span class="dot dot--amber"></span>Demo · el link del filtro lo sube Diego</span>
+    <section class="scene scene--cta" id="cap-13" data-title="Te toca" data-tone="green">
+      <div class="scene__inner scene__inner--free">
+        <div class="wrap cta__grid">
+          <div class="cta__text">
+            <p class="tag tag--green cta__locked">95.1 FM · En sintonía</p>
+            <h2 class="display display--xl cta__title"><span class="cta__w">Escanea.</span> <span class="cta__w">Sintonízate.</span> <em class="cta__w">Te toca.</em></h2>
+            <p class="line">Tu turno. Grábalo con tus amigos.</p>
+            <div class="qr">
+              <img src="assets/qr-filtro.png" alt="Código QR del filtro (demo)" width="320" height="320" loading="lazy" />
+              <span class="qr__label"><span class="dot dot--amber"></span>Demo · el link del filtro lo sube Diego</span>
+            </div>
+            <a class="btn btn--green" href="https://radio.iteso.mx/" target="_blank" rel="noopener">radio.iteso.mx ↗</a>
           </div>
-          <a class="btn btn--green" href="https://radio.iteso.mx/" target="_blank" rel="noopener">radio.iteso.mx ↗</a>
-        </div>
-        <div class="col-visual">
           <div class="phone phone--cta">
             <video class="cta__video" muted playsinline loop preload="none" poster="assets/ots-poster.jpg" data-lazy-video>
               <source data-src="assets/ots-720.webm" type="video/webm" />
@@ -376,7 +473,7 @@
     </section>
 
     <!-- CRÉDITOS -->
-    <section class="chapter chapter--creditos" id="cap-14" data-title="Créditos">
+    <section class="scene scene--creditos" id="cap-14" data-title="Créditos" data-tone="blue">
       <div class="wrap">
         <h2 class="display display--sm">Créditos y fuentes</h2>
         <ul class="team">
@@ -388,13 +485,13 @@
           <h3>Datos</h3>
           <ul>
             <li><a href="https://magis.iteso.mx/nota/radio-iteso-95-1-esta-al-aire/" target="_blank" rel="noopener">Magis ITESO · Radio ITESO 95.1 está al aire</a></li>
-            <li><a href="https://somosaudiencias.ift.org.mx/archivos/Consumo_Radio_ENCCA2024_V2.pdf" target="_blank" rel="noopener">IFT · ENCCA 2024, consumo de radio</a></li>
+            <li><a href="https://somosaudiencias.ift.org.mx/archivos/Consumo_Radio_ENCCA2024_V2.pdf" target="_blank" rel="noopener">IFT · ENCCA 2024, consumo de radio</a> · <a href="https://dplnews.com/?p=183684" target="_blank" rel="noopener">serie ENCCA 2015–2023 (DPL News)</a></li>
             <li><a href="https://www.edisonresearch.com/the-gen-z-audio-report/" target="_blank" rel="noopener">Edison Research + SiriusXM · Gen Z Audio Report 2025</a></li>
             <li><a href="https://www.emarketer.com/content/youtube-social-media-lead-gen-z-content-discovery-algorithms-drive-viewing-choices" target="_blank" rel="noopener">eMarketer · Toluna “Gen Z Decoded”</a></li>
             <li><a href="https://arinsider.co/2019/12/30/40-percent-of-gen-z-use-social-ar-lenses/" target="_blank" rel="noopener">AR Insider · JWT Intelligence</a></li>
           </ul>
           <h3>Imágenes</h3>
-          <p>Escenas generadas con IA (Higgsfield) a partir de la lámina de Nachito y fotos de referencia del campus de Wikimedia Commons (Franciscoaguayoguizar, CC BY-SA 3.0). Video de referencia del pase de Jamal: uso académico.</p>
+          <p>Escenas generadas con IA (Higgsfield: Cinema Studio, GPT Image 2, Kling 3.0 y Genjutsu) a partir de la lámina de Nachito y fotos de referencia del campus de Wikimedia Commons (Franciscoaguayoguizar, CC BY-SA 3.0). Video de referencia del pase de Jamal: uso académico.</p>
         </div>
         <p class="disclaimer">Proyecto académico · ITESO · Taller de Tecnologías Emergentes (EAM3632I), Módulo 05. <strong>No es oficial del ITESO ni de Radio ITESO.</strong></p>
       </div>
